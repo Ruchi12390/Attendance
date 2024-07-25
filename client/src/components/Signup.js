@@ -11,7 +11,11 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { useHistory } from "react-router-dom";
 import Alert from '@material-ui/lab/Alert';
-import { config } from '../config/config.js';  // Ensure correct import path
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import { config } from '../config/config.js'; // Ensure correct import path
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -19,10 +23,10 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        padding:'30px',
-        border:'0.25px solid blue',
+        padding: '30px',
+        border: '0.25px solid blue',
         boxShadow: '2px 2px 5px rgba(0,0.75,0.75,0.75)',
-        borderRadius:'20px',
+        borderRadius: '20px',
     },
     avatar: {
         margin: theme.spacing(1),
@@ -31,7 +35,6 @@ const useStyles = makeStyles((theme) => ({
     form: {
         width: '100%', // Fix IE 11 issue.
         marginTop: theme.spacing(3),
-
     },
     submit: {
         margin: theme.spacing(3, 0, 2),
@@ -44,6 +47,10 @@ const useStyles = makeStyles((theme) => ({
         padding: '0px',
         width: '100%',
     },
+    formControl: {
+        margin: theme.spacing(1),
+        minWidth: 120,
+    },
 }));
 
 export default function Signup() {
@@ -55,6 +62,7 @@ export default function Signup() {
         lastName: '',
         password: '',
         email: '',
+        role: 'student', // Default role
         open: false,
         error: ''
     });
@@ -106,6 +114,10 @@ export default function Signup() {
         validateInput(name, event.target.value);
     };
 
+    const handleRoleChange = event => {
+        setValues({ ...values, role: event.target.value });
+    };
+
     const goto = (res, user) => {
         if (res.status === 200) {
             history.push("/login", user);
@@ -142,7 +154,8 @@ export default function Signup() {
             firstName: values.firstName.trim(),
             lastName: values.lastName.trim(),
             email: values.email.trim(),
-            password: values.password.trim()
+            password: values.password.trim(),
+            role: values.role
         };
 
         create(user).then((data) => {
@@ -160,7 +173,7 @@ export default function Signup() {
     };
 
     return (
-        <Container component="main" maxWidth="xs" >
+        <Container component="main" maxWidth="xs">
             <CssBaseline />
             <div className={classes.paper}>
                 <Avatar className={classes.avatar}>
@@ -233,6 +246,22 @@ export default function Signup() {
                             />
                             {errorText.password && <Alert className={classes.alert} severity="error">{errorText.password}</Alert>}
                         </Grid>
+                        <Grid item xs={12}>
+                            <FormControl variant="outlined" className={classes.formControl} fullWidth>
+                                <InputLabel id="role-label">Role</InputLabel>
+                                <Select
+                                    labelId="role-label"
+                                    id="role-select"
+                                    value={values.role}
+                                    onChange={handleRoleChange}
+                                    label="Role"
+                                >
+                                    <MenuItem value="student">Student</MenuItem>
+                                    <MenuItem value="teacher">Teacher</MenuItem>
+                                    <MenuItem value="admin">Admin</MenuItem>
+                                </Select>
+                            </FormControl>
+                        </Grid>
                     </Grid>
                     <Button
                         type="submit"
@@ -241,7 +270,6 @@ export default function Signup() {
                         className={classes.submit}
                         disabled={!isFormValid()}
                         onClick={clickSubmit}
-                        
                     >
                         Sign Up
                     </Button>

@@ -11,10 +11,11 @@ import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import { useHistory } from "react-router-dom";
+import { useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { loginCheck } from '../redux/actionCreators';
 import Alert from '@material-ui/lab/Alert';
+import RoleSelectionDialog from './RoleSelectionDialog'; // Ensure correct path
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -59,15 +60,18 @@ const Login = (props) => {
         password: ''
     });
 
-    const regex = {
-        email: /^([a-z0-9_\.\+-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/i,
-        password: /^(?=.*\d)(?=.*[a-zA-Z])(?=.*[\W_]).{6,}$/
-    };
-
     const [errorText, setErrorText] = useState({
         email: '',
         password: ''
     });
+
+    const [openDialog, setOpenDialog] = useState(false);
+    const [selectedRole, setSelectedRole] = useState('');
+
+    const regex = {
+        email: /^([a-z0-9_\.\+-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/i,
+        password: /^(?=.*\d)(?=.*[a-zA-Z])(?=.*[\W_]).{6,}$/
+    };
 
     const validateInput = (name, input) => {
         if (name === 'email') {
@@ -98,8 +102,19 @@ const Login = (props) => {
 
         props.loginCheck(user, function (token) {
             localStorage.setItem('token', token);
-            history.push("/");
+            // Open the role selection dialog after successful login
+            setOpenDialog(true);
         });
+    };
+
+    const handleCloseDialog = () => {
+        setOpenDialog(false);
+    };
+
+    const handleRoleSelect = (role) => {
+        setSelectedRole(role);
+        // Redirect or take action based on the selected role
+        history.push(`/${role}/dashboard`); // Example redirection
     };
 
     return (
@@ -178,6 +193,11 @@ const Login = (props) => {
                     </form>
                 </div>
             </Grid>
+            <RoleSelectionDialog
+                open={openDialog}
+                onClose={handleCloseDialog}
+                onSelectRole={handleRoleSelect}
+            />
         </Grid>
     );
 };
