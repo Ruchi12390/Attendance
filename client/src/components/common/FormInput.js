@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function FormInput(props) {
     const classes = useStyles();
-
+    
     const [errorText, setErrorText] = React.useState({})
 
     const [minSize, setMinSize] = React.useState(50)

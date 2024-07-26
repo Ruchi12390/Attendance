@@ -28,7 +28,7 @@ const resume = {
         }
 
     ],
-    skills: [
+    student: [
         {
             skillName: '',
             keywords: ['']

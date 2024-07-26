@@ -10,13 +10,12 @@ import Button from '@material-ui/core/Button';
 //import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
+import Courses from './forms/Courses';
+import Student from './forms/Student';
+import Student2 from './forms/Student2';
 import Personal from './forms/Personal';
-import Education from './forms/Education';
-import Experience from './forms/Experience';
-import Project from './forms/Project';
 import Skill from './forms/Skill';
 import Achievement from './forms/Achievement';
-import Template from './forms/Template';
 import HiddenResume from './templates/HiddenResume'
 import { useHistory } from "react-router-dom"
 import { connect } from 'react-redux';
@@ -73,7 +72,7 @@ const useStyles = makeStyles((theme) => ({
     },
     stepper: {
         margin: theme.spacing(8, 1),
-        width: '12%',
+        width: '30%',
         display: 'inline-block',
         [theme.breakpoints.down('md')]: {
             display: 'none',
@@ -87,7 +86,7 @@ const useStyles = makeStyles((theme) => ({
         marginRight: '',
         [theme.breakpoints.up('lg')]: {
             position: 'absolute',
-            left: '480px',
+            left: '650px',
             top: '80px',
         },
         [theme.breakpoints.up('sm')]: {
@@ -137,24 +136,24 @@ const Builder = (props) => {
 
     const token = props.token;
 
-    const steps = ['Personal', 'Educational', 'Experience', 'Projects', 'Skills', 'Achievements', 'Template'];
+    const steps = ['Add Courses', 'Add Student', 'Add Remaining Student', 'Add Single Student', 'Delete Student', 'Update Course Details', 'Update Student details'];
 
     function getStepContent(step) {
         switch (step) {
             case 0:
-                return <Personal />;
+                return <Courses />;
             case 1:
-                return <Education resume={props.resume} />;
+                return <Student />;
             case 2:
-                return <Experience resume={props.resume} />;
+                return <Student />;
             case 3:
-                return <Project resume={props.resume} />;
+                return <Personal />;
             case 4:
                 return <Skill resume={props.resume} />;
             case 5:
                 return <Achievement resume={props.resume} />;
             case 6:
-                return <Template resume={props.resume} />;
+                return <Student2 resume={props.resume} />;
             default:
                 throw new Error('Unknown step');
         }

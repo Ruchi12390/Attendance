@@ -80,7 +80,7 @@ const ButtonAppBar = (props) => {
                 <Toolbar>
                     <img className={classes.logo} src="./logo1.jpg" alt="logo" />
                     <Typography variant="h5" className={classes.title}>
-                        <Link exact to="/" className={classes.link}>Resume Builder</Link>
+                        <Link exact to="/" className={classes.link}>Attendance</Link>
                     </Typography>
                     {(!props.token) ? (
                         <React.Fragment>

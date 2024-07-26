@@ -51,12 +51,12 @@ export default function FormSection(props) {
                     );
                 })
             }
-            <Button onClick={addSection}
+            <Button 
                 variant="contained"
                 color="primary"
                 className={classes.button}
             >
-                Add {props.name}
+                {props.buttonText} 
             </Button>
         </React.Fragment>
     );

@@ -6,6 +6,8 @@ import Home from './components/Home';
 import Signup from './components/Signup';
 import Login from './components/Login';
 import Builder from './components/Builder';
+import Attendance from './components/Attendance.js';
+import Marks from './components/Marks.js';
 import Dashboard from './components/Dashboard';
 import ForgotPassword from './components/ForgotPassword';
 import ResetPassword from './components/ResetPassword';
@@ -52,6 +54,8 @@ const MainRouter = (props) => {
           <Route path="/dashboard" component={Dashboard} />
           <Route path="/template1" component={Template1} />
           <Route path="/template2" component={Template2} />
+          <Route path="/attendance" component={Attendance} />
+          <Route path="/marks" component={Marks} />
         </Switch>
       </div>
       <Footer />

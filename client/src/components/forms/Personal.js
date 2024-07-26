@@ -83,7 +83,7 @@ function PersonalForm(props) {
     return (
         <React.Fragment>
             <Typography variant="h6" gutterBottom>
-                Personal Details
+                Student Details
             </Typography>
             <hr className={classes.line}></hr>
             <Grid container spacing={3}>
@@ -151,19 +151,26 @@ function PersonalForm(props) {
                     <Alert className={classes.alert} severity="error">{errorText.phone}</Alert> : <div></div>
                 }
 
-                <Grid item xs={12}>
+                <Grid item xs={12} sm={6}>
                     <TextField
                         id="website"
                         name="website"
-                        label="Professional Profile/Website"
+                        label="Enrollment No."
                         value={props.resume.personal.website}
                         onChange={handleChange}
                         fullWidth
-                        error={errorText.website}
                     />
-                </Grid>{(errorText.website) ?
-                    <Alert className={classes.alert} severity="error">{errorText.website}</Alert> : <div></div>
-                }
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                    <TextField
+                        id="Year"
+                        name="Year"
+                        label="Year"
+                        
+                        onChange={handleChange}
+                        fullWidth
+                    />
+                </Grid>
             </Grid>
         </React.Fragment>
     );

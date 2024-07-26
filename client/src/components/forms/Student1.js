@@ -2,7 +2,7 @@ import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import FormSection from '../common/FormSection';
 
-export default function Project() {
+export default function Student1() {
 
     const project = {
         FirstName: '',
